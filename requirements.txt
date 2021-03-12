@@ -1,3 +1,4 @@
 pyTelegramBotApi
 bs4
 pymysql
+boto
