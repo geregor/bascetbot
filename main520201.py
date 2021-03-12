@@ -1,11 +1,13 @@
 import requests
 from bs4 import BeautifulSoup as BS
 import re
-import sqlite3
+#import sqlite3
 import telebot
 from time import sleep
 import traceback
-
+import pymysql.cursors
+from adds import connect
+conn = connect()
 bot = telebot.TeleBot("1486092253:AAFVMoBeQ5MTKL0kNSiCocp7dVmayYPwNoY")
 while True:
     try:
@@ -49,12 +51,12 @@ while True:
             if (col == -2) or (col == 2) :
                 c = True
 
-            with sqlite3.connect ( 'server.db' ) as conn :
-                cursor = conn.cursor ()
+            with conn.cursor() as cursor :
                 # print(name)
-                result = cursor.execute ( f"SELECT names FROM live WHERE names = '{name}'" )
+                cursor.execute ( f"SELECT names FROM live WHERE names = '{name}'" )
+
                 res = 0
-                if result.fetchone () == None :
+                if cursor.fetchone () == None :
                     if ('(Ж)' not in name) and (len ( scores ) == 2) and (c == True) and (status == "Перерыв") :
                         cursor.execute (
                             f"""INSERT INTO live(names,href) VALUES ('{str ( name )}','{str ( link ) + str ( i )}')""" )
@@ -72,12 +74,14 @@ while True:
                 cursor.execute ( f"SELECT href FROM live" )
                 qq = cursor.fetchall ()
                 for m in qq :
-                    linkend = m [ 0 ]
+                    for b,c in m.items():
+                        linkend = c
                     rer = requests.get ( linkend )
                     soupes = BS (rer.content , 'html.parser')
                     cursor.execute ( f"SELECT message_id FROM live WHERE href = '{linkend}'" )
                     qq = cursor.fetchone ()
-                    message_id = qq[0]
+                    for b,c in qq.items():
+                        message_id = c
                     kom = 0
                     for i in soupes.findAll ( 'div' , class_='detail' ):
                         kom += 1
@@ -91,19 +95,17 @@ while True:
                         a = a.replace ( ')' , '' )
                         a = a.split ( ',' )
                         scoreses = a
-                        qq = cursor.execute(f"SELECT result FROM live WHERE href = '{linkend}'").fetchone()
-                        print(qq[0])
+                        qq = cursor.execute(f"SELECT result FROM live WHERE href = '{linkend}'")
                         print(scoreses[2])
                         resu = scoreses [ 2 ]
                         resu = resu.split ( ':' )
-                        if ((qq [ 0 ] == 1) and (resu [ qq [ 0 ] - 1 ] > resu [ qq [ 0 ] ])) or (
-                                (qq [ 0 ] == 2) and (resu [ qq [ 0 ] - 2 ]) < (resu [ qq [ 0 ] - 1 ])) :
+                        if ((qq == 1) and (resu [ qq - 1 ] > resu [ qq ])) or ((qq == 2) and (resu [ qq - 2 ]) < (resu [ qq - 1 ])) :
                             bot.edit_message_text ( "Победа ✅✅✅\n" + name , "@mlg_betbot" , message_id )
                         else :
                             resu = scoreses [ 3 ]
                             resu = resu.split ( ':' )
-                            if ((qq [ 0 ] == 1) and (resu [ qq [ 0 ] - 1 ] > resu [ qq [ 0 ] ])) or (
-                                    (qq [ 0 ] == 2) and (resu [ qq [ 0 ] - 2 ]) < (resu [ qq [ 0 ] - 1 ])) :
+                            if ((qq == 1) and (resu [ qq - 1 ] > resu [ qq ])) or (
+                                    (qq  == 2) and (resu [ qq - 2 ]) < (resu [ qq - 1 ])) :
                                 bot.edit_message_text ( "Победа ✅✅✅\n" + name , "@mlg_betbot" , message_id )
                             else :
                                 bot.edit_message_text ( "Поражение ❌❌❌\n" + name , "@mlg_betbot" , message_id )
