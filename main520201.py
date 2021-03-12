@@ -92,21 +92,22 @@ while True:
                         a = a.split ( ',' )
                         scoreses = a
                         qq = cursor.execute(f"SELECT result FROM live WHERE href = '{linkend}'").fetchone()
-                        k = False
                         print(qq[0])
                         print(scoreses[2])
-                        if k == False:
-                            resu = scoreses[2]
-                            resu = resu.split(':')
-                            if ((qq[0] == 1) and (resu[qq[0]-1] > resu[qq[0]])) or ((qq[0] == 2) and (resu[qq[0]-2]) < (resu[qq[0]-1]) ):
-                                bot.edit_message_text ( "Победа ✅✅✅\n"+name , "@mlg_betbot" , message_id )
-                            else:
-                                resu = scoreses [ 3 ]
-                                resu = resu.split ( ':' )
-                                if ((qq[0] == 1) and (resu[qq[0]-1] > resu[qq[0]])) or ((qq[0] == 2) and (resu[qq[0]-2]) < (resu[qq[0]-1]) ) :
-                                    bot.edit_message_text ( "Победа ✅✅✅\n"+name , "@mlg_betbot" , message_id )
-                                else:
-                                    bot.edit_message_text ( "Поражение ❌❌❌\n"+name , "@mlg_betbot" , message_id )
+                        resu = scoreses [ 2 ]
+                        resu = resu.split ( ':' )
+                        if ((qq [ 0 ] == 1) and (resu [ qq [ 0 ] - 1 ] > resu [ qq [ 0 ] ])) or (
+                                (qq [ 0 ] == 2) and (resu [ qq [ 0 ] - 2 ]) < (resu [ qq [ 0 ] - 1 ])) :
+                            bot.edit_message_text ( "Победа ✅✅✅\n" + name , "@mlg_betbot" , message_id )
+                        else :
+                            resu = scoreses [ 3 ]
+                            resu = resu.split ( ':' )
+                            if ((qq [ 0 ] == 1) and (resu [ qq [ 0 ] - 1 ] > resu [ qq [ 0 ] ])) or (
+                                    (qq [ 0 ] == 2) and (resu [ qq [ 0 ] - 2 ]) < (resu [ qq [ 0 ] - 1 ])) :
+                                bot.edit_message_text ( "Победа ✅✅✅\n" + name , "@mlg_betbot" , message_id )
+                            else :
+                                bot.edit_message_text ( "Поражение ❌❌❌\n" + name , "@mlg_betbot" , message_id )
+
 
                         cursor.execute(f"DELETE FROM live WHERE href ='{linkend}'")
                         conn.commit()
