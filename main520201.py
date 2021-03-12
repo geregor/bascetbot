@@ -46,8 +46,10 @@ while True:
                     game = game.split ( ':' )
                     if game [ 0 ] > game [ 1 ] :
                         col += 1
-                    else :
+                    elif game [0] < game [1]:
                         col -= 1
+                    else:
+                        col = 0
             if (col == -2) or (col == 2) :
                 c = True
 
