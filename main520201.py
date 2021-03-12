@@ -99,14 +99,14 @@ while True:
                             resu = scoreses[2]
                             resu = resu.split(':')
                             if ((qq[0] == 1) and (resu[qq[0]-1] > resu[qq[0]])) or ((qq[0] == 2) and (resu[qq[0]-2]) < (resu[qq[0]-1]) ):
-                                bot.edit_message_text ( "Победа ✅✅✅\n"+names , "@mlg_betbot" , message_id )
+                                bot.edit_message_text ( "Победа ✅✅✅\n"+name , "@mlg_betbot" , message_id )
                             else:
                                 resu = scoreses [ 3 ]
                                 resu = resu.split ( ':' )
                                 if ((qq[0] == 1) and (resu[qq[0]-1] > resu[qq[0]])) or ((qq[0] == 2) and (resu[qq[0]-2]) < (resu[qq[0]-1]) ) :
-                                    bot.edit_message_text ( "Победа ✅✅✅\n"+names , "@mlg_betbot" , message_id )
+                                    bot.edit_message_text ( "Победа ✅✅✅\n"+name , "@mlg_betbot" , message_id )
                                 else:
-                                    bot.edit_message_text ( "Поражение ❌❌❌\n"+names , "@mlg_betbot" , message_id )
+                                    bot.edit_message_text ( "Поражение ❌❌❌\n"+name , "@mlg_betbot" , message_id )
 
                         cursor.execute(f"DELETE FROM live WHERE href ='{linkend}'")
                         conn.commit()
