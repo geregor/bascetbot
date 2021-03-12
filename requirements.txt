@@ -1,2 +1,3 @@
 pyTelegramBotApi
 bs4
+pymysql
