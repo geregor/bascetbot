@@ -112,7 +112,7 @@ while True:
                         conn.commit()
                         #bot.edit_message_text ( "Новый автомат" , "@mlg_betbot" , message_id )
 
-        sleep ( 45 )
+        sleep ( 10 )
     except:
         print("-----------------------------------------------------------\n"
               "-------Произошла ошибка, программа продолждает работу------\n"
