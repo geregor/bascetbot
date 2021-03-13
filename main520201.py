@@ -98,6 +98,8 @@ while True:
                         a = a.split ( ',' )
                         scoreses = a
                         qq = cursor.execute(f"SELECT result FROM live WHERE href = '{linkend}'")
+                        for b,c in qq.items():
+                            qqe = c
                         print(scoreses[2])
                         cursor.execute(f"SELECT names FROM live WHERE href = '{linkend}'")
                         qq = cursor.fetchone()
@@ -105,13 +107,12 @@ while True:
                             name = c
                         resu = scoreses [ 2 ]
                         resu = resu.split ( ':' )
-                        if ((qq == 1) and (resu [ qq - 1 ] > resu [ qq ])) or ((qq == 2) and (resu [ qq - 2 ]) < (resu [ qq - 1 ])) :
+                        if ((qqe == 1) and (resu [ qqe - 1 ] > resu [ qqe ])) or ((qqe == 2) and (resu [ qqe - 2 ]) < (resu [ qqe - 1 ])) :
                             bot.edit_message_text ( "Победа ✅✅✅\n" + name , "@mlg_betbot" , message_id )
                         else :
                             resu = scoreses [ 3 ]
                             resu = resu.split ( ':' )
-                            if ((qq == 1) and (resu [ qq - 1 ] > resu [ qq ])) or (
-                                    (qq  == 2) and (resu [ qq - 2 ]) < (resu [ qq - 1 ])) :
+                            if ((qqe == 1) and (resu [ qqe - 1 ] > resu [ qqe ])) or ((qqe  == 2) and (resu [ qqe - 2 ]) < (resu [ qqe - 1 ])) :
                                 bot.edit_message_text ( "Победа ✅✅✅\n" + name , "@mlg_betbot" , message_id )
                             else :
                                 bot.edit_message_text ( "Поражение ❌❌❌\n" + name , "@mlg_betbot" , message_id )
