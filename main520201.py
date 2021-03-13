@@ -99,6 +99,10 @@ while True:
                         scoreses = a
                         qq = cursor.execute(f"SELECT result FROM live WHERE href = '{linkend}'")
                         print(scoreses[2])
+                        cursor.execute(f"SELECT names FROM live WHERE href = '{linkend}'")
+                        qq = cursor.fetchone()
+                        for b,c in qq.items():
+                            name = c
                         resu = scoreses [ 2 ]
                         resu = resu.split ( ':' )
                         if ((qq == 1) and (resu [ qq - 1 ] > resu [ qq ])) or ((qq == 2) and (resu [ qq - 2 ]) < (resu [ qq - 1 ])) :
