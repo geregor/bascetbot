@@ -65,11 +65,11 @@ while True:
                         conn.commit ()
                         if col == -2 :
                             message = bot.send_message ( "@mlg_betbot" , name + "\n" + scores [ 0 ] + " " + scores [
-                                1 ] + " \nСтавка: П1 (1%) в 3 четверти\nВ случае поражения ставить на 4 четверть П2 (2.5%)" )
+                                1 ] + " \nСтавка: П1 (1%) в 3 четверти\nВ случае поражения ставить на 4 четверть П1 (2.5%)" )
                             res = 1
                         elif col == 2 :
                             message = bot.send_message ( "@mlg_betbot" , name + "\n" + scores [ 0 ] + " " + scores [
-                                1 ] + " \nСтавка: П2 (1%) в 3 четверти\nВ случае поражения ставить на 4 четверть П1 (2.5%)" )
+                                1 ] + " \nСтавка: П2 (1%) в 3 четверти\nВ случае поражения ставить на 4 четверть П2 (2.5%)" )
                             res = 2
                         cursor.execute ( f"UPDATE live SET message_id = {message.message_id},result={res} WHERE names = '{name}'" )
                         conn.commit()
