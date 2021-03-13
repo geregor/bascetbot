@@ -97,7 +97,8 @@ while True:
                         a = a.replace ( ')' , '' )
                         a = a.split ( ',' )
                         scoreses = a
-                        qq = cursor.execute(f"SELECT result FROM live WHERE href = '{linkend}'").fetchone()
+                        cursor.execute(f"SELECT result FROM live WHERE href = '{linkend}'")
+                        qq = cursor.fetchone()
                         for b,c in qq.items():
                             qqe = c
                         print(scoreses[2])
